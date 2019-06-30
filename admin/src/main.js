@@ -42,30 +42,30 @@ const RouterConfig = {
 };
 const router = new VueRouter(RouterConfig);
 
-router.beforeEach(async (to, from, next) => {
+// router.beforeEach(async (to, from, next) => {
 
-  iView.LoadingBar.start();
-  Util.title(to.meta.title)
+//   iView.LoadingBar.start();
+//   Util.title(to.meta.title)
 
-  let token = Vue.ls.get("token");
-  if (token) {
-    store.dispatch('admin/auth').then(() => {
-      next()
-    }).catch(ret => {
-      setTimeout(() => {
-        next('/login')
-      }, 1500);
-    })
+//   let token = Vue.ls.get("token");
+//   if (token) {
+//     store.dispatch('admin/auth').then(() => {
+//       next()
+//     }).catch(ret => {
+//       setTimeout(() => {
+//         next('/login')
+//       }, 1500);
+//     })
 
-  } else {
-    // 判断是否需要登录
-    if (!!to.meta.noAuth) {
-      next()
-    } else {
-      next('/login')
-    }
-  }
-});
+//   } else {
+//     // 判断是否需要登录
+//     if (!!to.meta.noAuth) {
+//       next()
+//     } else {
+//       next('/login')
+//     }
+//   }
+// });
 
 router.afterEach(() => {
   iView.LoadingBar.finish();
