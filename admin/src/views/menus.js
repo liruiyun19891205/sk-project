@@ -16,10 +16,21 @@ const menus = [{
     icon: "ios-cog",
     children: [{
       icon: "md-contacts",
-      name: "管理员管理",
+      name: "用户列表",
       path: "/admin"
     }]
-  }
+  },
+  {
+    name: "用户管理",
+    path: "user",
+    icon: "md-list-box",
+    children: [{
+        name: "用户列表",
+        path: "/user",
+        icon: "md-list"
+      }
+    ]
+  },
   //   {
   //     name: "分类管理",
   //     path: "category",
@@ -36,22 +47,7 @@ const menus = [{
   //       }
   //     ]
   //   },
-  //   {
-  //     name: "文章管理",
-  //     path: "article",
-  //     icon: "md-list-box",
-  //     children: [{
-  //         name: "文章列表",
-  //         path: "/article",
-  //         icon: "md-list"
-  //       },
-  //       {
-  //         name: "文章创建",
-  //         path: "/article/create",
-  //         icon: "md-add-circle"
-  //       }
-  //     ]
-  //   },
+
   //   {
   //     name: "评论管理",
   //     path: "comments",
