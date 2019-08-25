@@ -1,17 +1,17 @@
 module.exports = {
     environment: 'dev',
     database: {
-        dbName: 'boblog',
-        host: '172.16.3.101',
+        dbName: 'kgj',
+        host: '104.160.41.63',
         port: 3306,
-        user: 'enginer',
-        password: 'dataisbest'
+        user: 'root',
+        password: '123456'
     },
     db: {
-        host: '172.16.3.101',
-        user: 'enginer',
-        password: 'dataisbest',
-        database: 'mayson_demo_db',
+        host: '104.160.41.63',
+        user: 'root',
+        password: '123456',
+        database: 'kgj',
         port: 3306,
         // 最大连接数
         connectionLimit: 10
