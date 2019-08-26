@@ -24,7 +24,9 @@
         adminAuth: state => state.admin.adminAuth
       }),
     },
-    methods: {}
+    methods: {
+      
+    }
   }
 
 </script>

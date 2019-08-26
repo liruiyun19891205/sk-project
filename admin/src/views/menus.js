@@ -19,6 +19,17 @@ const menus = [{
       name: "管理员管理",
       path: "/admin"
     }]
+  },
+  //设备管理
+  {
+    name: "设备管理",
+    path: "equipment",
+    icon: "ios-cog",
+    children: [{
+      icon: "md-contacts",
+      name: "设备添加",
+      path: "/list"
+    }]
   }
   //   {
   //     name: "分类管理",

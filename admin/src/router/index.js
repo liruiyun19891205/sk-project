@@ -35,6 +35,26 @@ const routers = [{
         component: (resolve) => require(['../views/admin/index.vue'], resolve),
       },
       {
+        path: 'list',
+        name: 'list',
+        meta: {
+          module: "/list",
+          group: "set",
+          title: '设备管理-添加'
+        },
+        component: (resolve) => require(['../views/equipment/list.vue'], resolve),
+      },
+      {
+        path: 'listadd',
+        name: 'listadd',
+        meta: {
+          module: "/listadd",
+          group: "set",
+          title: '设备管理-添加'
+        },
+        component: (resolve) => require(['../views/equipment/listadd.vue'], resolve),
+      },
+      {
         //todo: 404
         path: '/403',
         name: '403',
