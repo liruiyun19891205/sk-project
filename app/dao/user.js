@@ -1,6 +1,5 @@
-const {
-    Admin
-} = require('../models/admin');
+const {Sequelize, Op} = require('sequelize')
+const {Admin } = require('../models/admin');
 
 
 class userDao {

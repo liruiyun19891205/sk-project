@@ -2,7 +2,9 @@
   <section>
     <section class="search">
       <Row :gutter="16">
-        <!-- <i-col span="12"><Input search enter-button="Search" placeholder="Enter something..." /></i-col>÷ -->
+        <i-col span="12"><Input search enter-button="Search" v-model="keyWord" v-on:on-search="searchEvent"
+            placeholder="Enter something..." />
+        </i-col>
         <i-col span="12"><Button type="info" @click="add">新增</Button></i-col>
       </Row>
     </section>
@@ -11,7 +13,7 @@
         <template slot-scope="{ row }" slot="name">
           <strong>{{ row.name }}</strong>
         </template>
-        <template slot-scope="{ row, index }" slot="action">
+        <template slot-scope="{ row,index }" slot="action">
           <Button type="primary" size="small" style="margin-right: 5px" @click="update(row)">编辑</Button>
           <Button type="error" size="small" @click="destroy(row.id)">删除</Button>
         </template>
@@ -45,11 +47,15 @@
 </template>
 
 <script>
+  import moment from 'moment'
   import merge from 'webpack-merge'
   import {
     mapState,
     mapActions
   } from 'vuex';
+  import {
+    debuglog
+  } from 'util';
 
   export default {
     name: "list",
@@ -134,7 +140,12 @@
             title: '创建时间',
             width: 150,
             key: 'created_at',
-            align: "center"
+            align: "center",
+            render: (h, params) => {
+              return h('div',
+                moment(new Date(params.row.created_at)).format('YYYY-MM-DD hh:mm')
+              )
+            }
           },
           {
             title: '操作',
@@ -162,9 +173,9 @@
           desc,
           keyword
         } = this.$route.query;
-
         const res = await this.getUserList({
-          page: this.currentPage
+          page: this.currentPage,
+          keyWord: this.keyWord
         });
         this.list = res.data.data.data;
         this.page = res.data.data.meta;
@@ -186,6 +197,9 @@
         this.formValidate.email = row.email;
         this.id = row.id;
         // this.$router.push(`/user/update/${id}`);
+      },
+      searchEvent() {
+        this._getUserList();
       },
       // 新增
       add() {

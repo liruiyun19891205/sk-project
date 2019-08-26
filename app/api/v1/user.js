@@ -80,10 +80,10 @@ router.get('/getUserList', async (ctx) => {
     const {
         page,
         desc,
-        keyword
+        keyWord
     } = ctx.query;
     // 查询文章列表
-    const getUserList = await userDao.getUserList(page, desc, keyword);
+    const getUserList = await userDao.getUserList(page, desc, keyWord);
     // 返回结果
     ctx.response.status = 200;
     ctx.body = res.json(getUserList);
