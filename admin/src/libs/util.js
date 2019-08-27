@@ -8,8 +8,8 @@ util.title = function (title) {
 };
 
 const ajaxUrl = process.env.NODE_ENV === 'development' ?
-  'http://localhost:3000/v1' :
-  'http://localhost:3000/v1';
+  'http://localhost:3005/v1' :
+  'http://localhost:3005/v1';
 
 util.ajax_url = ajaxUrl;
 

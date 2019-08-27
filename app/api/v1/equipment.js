@@ -18,9 +18,14 @@ const db = require('../../../core/db-util')(allConfig.db)
 // 管理员注册
 
 router.post('/list', async (ctx) => {
-    let param = ctx.body; //  query
-
-    let list = await db.execSql(`select * from T_MDA_EQUIPMENT `, [])
+    let param = ctx.request.body; //  query
+    console.log(param.SUB_PRO_NAME);
+    var sql="  select * from T_MDA_EQUIPMENT where 1=1  ";
+    if(param.SUB_PRO_NAME){
+        sql +=` and SUB_PRO_NAME like '%${param.SUB_PRO_NAME}%' `;
+    }
+    console.log(sql);
+    let list = await db.execSql(sql, [])
     // 返回结果
     ctx.response.status = 200;
     ctx.body = res.json(list)
@@ -36,6 +41,37 @@ router.post('/listadd', async (ctx) => {
     // db.execSql
     // db.execTransaction
 
+    // 返回结果
+    ctx.response.status = 200;
+    ctx.body = res.json(list)
+})
+//删除
+router.post('/listdel', async (ctx) => {
+    let obj = ctx.request.body //  query
+    console.log(obj);
+    let list = await db.remove('T_MDA_EQUIPMENT', obj);
+    // 返回结果
+    ctx.response.status = 200;
+    ctx.body = res.json(list)
+})
+//编辑页面首次加载根据id查询
+router.post('/listByid', async (ctx) => {
+    let param =ctx.request.body; //  query
+    let list = await db.find('T_MDA_EQUIPMENT',param)
+    // 返回结果
+    ctx.response.status = 200;
+    ctx.body = res.json(list)
+})
+
+
+//编辑页面首次加载根据id查询
+router.post('/listEditid', async (ctx) => {
+    console.log(11);
+    let param =ctx.request.body; //  query
+    let {id,...obj}=param;
+    // update(table, moduleBean, whereParam)
+    // db.update(tableName, {level:'12', nick:'jerry'}, {id:'115', name:'hou'});
+    let list = await db.update('T_MDA_EQUIPMENT',obj,{id})
     // 返回结果
     ctx.response.status = 200;
     ctx.body = res.json(list)

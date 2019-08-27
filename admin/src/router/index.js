@@ -34,6 +34,17 @@ const routers = [{
         },
         component: (resolve) => require(['../views/admin/index.vue'], resolve),
       },
+      // 用户
+      {
+        path: 'user',
+        name: 'user',
+        meta: {
+          module: "/user",
+          group: "user",
+          title: '用户 - 列表'
+        },
+        component: (resolve) => require(['../views/user/list.vue'], resolve),
+      }, 
       {
         path: 'list',
         name: 'list',

@@ -11,6 +11,22 @@ export default {
     return fetch.post('/equipment/listadd', params)
   },
 
+  //设备删除
+  listdel(params) {
+    return fetch.post('/equipment/listdel', params)
+  },
+
+  //设备删除
+  listByid(params) {
+    return fetch.post('/equipment/listByid', params)
+  },
+
+  //设备删除
+  listEdit(params) {
+    return fetch.post('/equipment/listEditid', params)
+  },
+
+
   // 验证管理员token
   //   auth(params) {
   //     return fetch.get('/admin/auth', params)

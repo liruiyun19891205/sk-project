@@ -3,7 +3,7 @@ import Vuex from 'vuex'
 import * as types from './mutation-types'
 import app from './app'
 import admin from './modules/admin'
-
+import user from './modules/user'
 Vue.use(Vuex);
 
 const state = {
@@ -49,6 +49,7 @@ export default new Vuex.Store({
   mutations,
   modules: {
     app,
-    admin
+    admin,
+    user
   },
 });

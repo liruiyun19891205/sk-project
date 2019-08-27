@@ -7,11 +7,14 @@ import Vuex from 'vuex';
 import Util from './libs/util'
 import App from './app.vue';
 import store from './vuex'
-import {sync} from 'vuex-router-sync'
+import {
+  sync
+} from 'vuex-router-sync'
 import VueLocalStorage from 'vue-ls';
 import iView from 'iview';
 import 'iview/dist/styles/iview.css';
 import './assets/style/admin.css';
+import moment from "moment";
 
 
 Vue.config.productionTip = false
@@ -73,7 +76,16 @@ router.afterEach(() => {
 });
 
 sync(store, router)
+
 /* eslint-disable no-new */
+/**
+ * 试驾过滤器
+ */
+Vue.filter('dateFormat', function (date, format = 'yyyy-MM-dd HH:mm:ss') {
+  if (!date) return ''
+  return moment(date).format(format)
+});
+
 new Vue({
   el: '#app',
   router: router,

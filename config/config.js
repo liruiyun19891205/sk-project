@@ -2,13 +2,13 @@ module.exports = {
     environment: 'dev',
     database: {
         dbName: 'kgj',
-        host: '104.160.41.63',
+        host: 'localhost',
         port: 3306,
         user: 'root',
         password: '123456'
     },
     db: {
-        host: '104.160.41.63',
+        host: 'localhost',
         user: 'root',
         password: '123456',
         database: 'kgj',

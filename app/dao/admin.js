@@ -20,7 +20,7 @@ class AdminDao {
 
         const admin = new Admin();
         admin.email = v.get('body.email');
-        admin.password = v.get('body.password2');
+        admin.password = v.get('body.password');
         admin.nickname = v.get('body.nickname');
         admin.save();
         

@@ -151,13 +151,15 @@
 </template>
 <script>
 import apiserver from "../../api/equipment";
+import { log } from 'util';
 export default {
   data() {
     return {
+      id: this.$route.query.id,
       formItem: {
-        PRO_ID: "",
-        EQUIPMENT_CODE: "",
-        SUB_PRO_NAME: "",
+        PRO_ID: "", //计划ID
+        EQUIPMENT_CODE: "", //设备编码
+        SUB_PRO_NAME: "", //设备名称
         FONDS_NO: "", //档号
         SOURCE: "", //外购/自研
         IS_IMPORT: "", //进口国别
@@ -179,12 +181,12 @@ export default {
     async _save(obj) {
       let res = await apiserver.listadd(obj);
     },
-    goback(){
-       this.$router.push(`/list`);
+    goback() {
+      this.$router.push(`/list`);
     },
     add() {
       let EQUIPMENT_CODE = this.formItem.EQUIPMENT_CODE;
-      let PRO_ID = "1";
+      let PRO_ID = "1"; //计划id，暂时写死的 110,以后记得改
       //this.formItem.PRO_ID;
       let SUB_PRO_NAME = this.formItem.SUB_PRO_NAME;
       let FONDS_NO = this.formItem.FONDS_NO;
@@ -220,19 +222,46 @@ export default {
         JK_GC,
         PRODUCTSUPPLIERS
       };
-      var res=this._save(obj);
-      this._save(obj).then(res=>{
-        console.log(res);
-      })
-      // if (res.Status === 200) {
-      //     // 刷新数据，关闭组件
-      //     this.$emit("addtemp-event", "addtempEvent");
-      //     this.$emit("addtemp-event", false);
-      //     this.$Message.success({ content: "保存成功！" });
-      //   } else {
-      //     this.$emit("addtemp-event", false);
-      //     this.$Message.error({ content: "保存失败！" });
-      //   }
+      if (this.id) {
+        obj.id=this.id;
+        apiserver.listEdit(obj).then(res=>{
+          console.log(res.code);
+          if(res.data.code==200){
+            this.$Message.success("修改成功!");
+            this.$router.push(`/list`);
+          }
+        })
+      } else {
+        this._save(obj);
+        this.$Message.success("新增成功!");
+        this.$router.push(`/list`);
+      }
+    }
+  },
+  mounted() {
+    //编辑
+    if (this.id) {
+      var obj = { id: this.id };
+      apiserver.listByid(obj).then(res => {
+        var list = res.data.data[0];
+        this.formItem.EQUIPMENT_CODE = list.EQUIPMENT_CODE;
+        this.formItem.PRO_ID = list.PRO_ID;
+        this.formItem.SUB_PRO_NAME=list.SUB_PRO_NAME;
+        this.formItem.FONDS_NO = list.FONDS_NO;
+        this.formItem.SOURCE = list.SOURCE;
+        this.formItem.IS_IMPORT = list.IS_IMPORT;
+        this.formItem.DW_TT = list.DW_TT;
+        this.formItem.SL = list.SL;
+        this.formItem.ZBQK = list.ZBQK;
+        this.formItem.BZ = list.BZ;
+        this.formItem.SB_DJ = list.SB_DJ;
+        this.formItem.SB_HJ = list.SB_HJ;
+        this.formItem.SB_WH = list.SB_WH;
+        this.formItem.SB_YSJE = list.SB_YSJE;
+        this.formItem.SB_BZ = list.SB_BZ;
+        this.formItem.JK_GC = list.JK_GC;
+        this.formItem.PRODUCTSUPPLIERS = list.PRODUCTSUPPLIERS;
+      });
     }
   }
 };
