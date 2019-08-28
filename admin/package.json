@@ -10,6 +10,7 @@
     "build": "node build/build.js"
   },
   "dependencies": {
+    "@riophae/vue-treeselect": "^0.2.0",
     "axios": "^0.19.0",
     "iview": "^3.4.2",
     "js-base64": "^2.5.1",

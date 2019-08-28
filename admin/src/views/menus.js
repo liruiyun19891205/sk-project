@@ -15,9 +15,13 @@ const menus = [{
     path: "set",
     icon: "ios-cog",
     children: [{
-      icon: "md-contacts",
       name: "用户列表",
-      path: "/admin"
+      path: "/user",
+      icon: "md-list"
+    }, {
+      name: "下拉树",
+      path: "/org",
+      icon: "md-list"
     }]
   },
   //设备管理
@@ -30,46 +34,7 @@ const menus = [{
       name: "设备添加",
       path: "/list"
     }]
-  },
-  {
-    name: "用户管理",
-    path: "user",
-    icon: "md-list-box",
-    children: [{
-        name: "用户列表",
-        path: "/user",
-        icon: "md-list"
-      }
-    ]
-  },
-  //   {
-  //     name: "分类管理",
-  //     path: "category",
-  //     icon: "md-move",
-  //     children: [{
-  //         name: "分类列表",
-  //         path: "/category",
-  //         icon: "md-list"
-  //       },
-  //       {
-  //         name: "分类创建",
-  //         path: "/category/create",
-  //         icon: "md-add-circle"
-  //       }
-  //     ]
-  //   },
-
-  //   {
-  //     name: "评论管理",
-  //     path: "comments",
-  //     icon: "md-text",
-  //     children: [{
-  //       name: "评论列表",
-  //       path: "/comments",
-  //       icon: "md-list"
-  //     }]
-  //   }
-
+  }
 ];
 export {
   menus
