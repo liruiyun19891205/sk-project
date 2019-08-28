@@ -44,7 +44,18 @@ const routers = [{
           title: '用户 - 列表'
         },
         component: (resolve) => require(['../views/user/list.vue'], resolve),
-      }, 
+      },
+      // 用户
+      {
+        path: 'org',
+        name: 'org',
+        meta: {
+          module: "/org",
+          group: "org",
+          title: '用户 - 下拉树'
+        },
+        component: (resolve) => require(['../views/user/org.vue'], resolve),
+      },
       {
         //todo: 404
         path: '/403',
