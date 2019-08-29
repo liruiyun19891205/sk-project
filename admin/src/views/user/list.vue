@@ -262,8 +262,6 @@
         });
       },
       cancel(name) {
-        console.log(name);
-
         this.$refs[name].resetFields();
         // this.$Message.info('Clicked cancel');
       }
