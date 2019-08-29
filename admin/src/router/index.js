@@ -40,13 +40,23 @@ const routers = [{
         name: 'user',
         meta: {
           module: "/user",
-          group: "user",
+          group: "set",
           title: '用户 - 列表'
         },
         component: (resolve) => require(['../views/user/list.vue'], resolve),
-      }, 
+      },
+      // 用户
       {
-        path: 'list',
+        path: 'org',
+        name: 'org',
+        meta: {
+          module: "/org",
+          group: "set",
+          title: '用户 - 下拉树'
+        },
+        component: (resolve) => require(['../views/user/org.vue'], resolve),
+      },
+      {
         name: 'list',
         meta: {
           module: "/list",
@@ -64,6 +74,16 @@ const routers = [{
           title: '设备管理-添加'
         },
         component: (resolve) => require(['../views/equipment/listadd.vue'], resolve),
+      },
+      {
+        path: '/infrlist',
+        name: 'infrlist',
+        meta: {
+          module: "/infrlist",
+          group: "infrlist",
+          title: '基建 - 列表'
+        },
+        component: (resolve) => require(['../views/infrastructure/list.vue'], resolve),
       },
       {
         //todo: 404
