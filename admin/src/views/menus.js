@@ -34,6 +34,17 @@ const menus = [{
       name: "设备添加",
       path: "/list"
     }]
+  },
+  // 系统管理  t_mda_infrastructure
+  {
+    name: "基建管理",
+    path: "infrastructure",
+    icon: "ios-cog",
+    children: [{
+      name: "基建列表",
+      path: "/infrlist",
+      icon: "md-list"
+    }]
   }
 ];
 export {
