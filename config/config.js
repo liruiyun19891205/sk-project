@@ -2,13 +2,13 @@ module.exports = {
     environment: 'dev',
     database: {
         dbName: 'kgj',
-        host: 'localhost',
+        host: '104.160.41.63',
         port: 3306,
         user: 'root',
         password: '123456'
     },
     db: {
-        host: 'localhost',
+        host: '104.160.41.63',
         user: 'root',
         password: '123456',
         database: 'kgj',
@@ -26,6 +26,4 @@ module.exports = {
     //     appSecret: '',
     //     loginUrl: 'https://api.weixin.qq.com/sns/jscode2session?appid=%s&secret=%s&js_code=%s&grant_type=authorization_code'
     // }
-
-    
 }
