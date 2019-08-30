@@ -5,7 +5,12 @@
         <tr>
           <td>设备名称：</td>
           <td>
-            <i-input v-model="SUB_PRO_NAME" :value.sync="value" placeholder="请输入..." style="width: 300px"></i-input>
+            <i-input
+              v-model="SUB_PRO_NAME"
+              :value.sync="value"
+              placeholder="请输入..."
+              style="width: 300px"
+            ></i-input>
             <i-button type="primary" @click="select">查询</i-button>
             <i-button type="primary" @click="add1">添加</i-button>
           </td>
@@ -14,7 +19,7 @@
     </Row>
     <Row>
       <i-col span="24">
-        <i-table 
+        <i-table
           :border="showBorder"
           :stripe="showStripe"
           :show-header="showHeader"
@@ -24,19 +29,31 @@
           :columns="tableColumns"
         ></i-table>
       </i-col>
-          <section class="page">
-        <Page :total="page.total" :page-size="page.per_page" :current="page.current_page" show-total
-          @on-change="handlePage"></Page>
-      </section>
+      <i-col span="24">
+        <section class="page">
+          <Page
+            :total="page.total"
+            :page-size="page.per_page"
+            :current="page.current_page"
+            show-total
+            @on-change="handlePage"
+          ></Page>
+        </section>
+      </i-col>
     </Row>
   </div>
 </template>
 <script>
 import apiserver from "../../api/equipment";
+import { log } from "util";
 export default {
   data() {
     return {
-      SUB_PRO_NAME:"",
+      page: {
+        current_page: 1,//当前第几页
+        per_page: 10 //一页有几条
+      },
+      SUB_PRO_NAME: "",
       value: "",
       modal: {
         isShow: false,
@@ -53,7 +70,7 @@ export default {
     };
   },
   methods: {
-    select(){
+    select() {
       this.getList();
     },
     add() {
@@ -64,11 +81,20 @@ export default {
       //  this.$router.push(`/listadd/${id}`);
     },
     //查询
-    async getList() {
-      var SUB_PRO_NAME=this.SUB_PRO_NAME;
-      console.log(SUB_PRO_NAME);
-      let res = await apiserver.list({SUB_PRO_NAME});
-      this.tableData = res.data.data;
+    async getList(index, pageSize) {
+      var SUB_PRO_NAME = this.SUB_PRO_NAME;
+      let res = await apiserver.list({
+        SUB_PRO_NAME,
+        index: index,
+        pageSize: pageSize
+      });
+      this.tableData = res.data.data.list;
+      this.page.total = res.data.data.count;
+    },
+    // 分页事件
+    handlePage(index) {
+      this.page.current_page = index;
+      this.getList(this.page.current_page, this.page.per_page);
     },
     // 渲染操作按钮
     renderAction(h, params) {
@@ -126,7 +152,7 @@ export default {
             if (res.Status == 200) {
               apiserver.list().then(res => {
                 // this.$Message.success(content, duration, onClose)
-                this.$Message.success( "删除成功");
+                this.$Message.success("删除成功");
               });
             } else {
               this.$Message.error("删除失败");
@@ -205,7 +231,14 @@ export default {
     }
   },
   mounted() {
-    this.getList();
+    this.getList(this.page.current_page, this.page.per_page);
   }
 };
 </script>
+
+<style scoped>
+.page {
+  padding: 32px 0;
+  text-align: center;
+}
+</style>
