@@ -57,10 +57,11 @@ const routers = [{
         component: (resolve) => require(['../views/user/org.vue'], resolve),
       },
       {
+        path: 'list',
         name: 'list',
         meta: {
           module: "/list",
-          group: "set",
+          group: "equipment",
           title: '设备管理-添加'
         },
         component: (resolve) => require(['../views/equipment/list.vue'], resolve),
@@ -70,7 +71,7 @@ const routers = [{
         name: 'listadd',
         meta: {
           module: "/listadd",
-          group: "set",
+          group: "equipment",
           title: '设备管理-添加'
         },
         component: (resolve) => require(['../views/equipment/listadd.vue'], resolve),
