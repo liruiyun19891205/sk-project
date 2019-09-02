@@ -87,6 +87,16 @@ const routers = [{
         component: (resolve) => require(['../views/infrastructure/list.vue'], resolve),
       },
       {
+        path: '/infrAdd',
+        name: 'infrAdd',
+        meta: {
+          module: "/infrAdd",
+          group: "infrAdd",
+          title: '基建 - 添加'
+        },
+        component: (resolve) => require(['../views/infrastructure/create.vue'], resolve),
+      },
+      {
         //todo: 404
         path: '/403',
         name: '403',

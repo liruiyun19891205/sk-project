@@ -19,7 +19,6 @@ const router = new Router({
  * 获取用户列表
  */
 router.get('/getList', async (ctx) => {
-    // 获取页码，排序方法，分类ID，搜索关键字
     const {
         page,
         pageSize,
@@ -36,10 +35,9 @@ router.get('/getList', async (ctx) => {
  * 获取用户列表
  */
 router.post('/save', async (ctx) => {
-    // 获取页码，排序方法，分类ID，搜索关键字
     const {
-        param
-    } = ctx.body;
+        ...param
+    } = ctx.request.body;
     // 查询文章列表
     const list = await infrastructureManger.save(param);
     // 返回结果
@@ -49,11 +47,10 @@ router.post('/save', async (ctx) => {
 /**
  * 获取用户列表
  */
-router.post('/update', async (ctx) => {
-    // 获取页码，排序方法，分类ID，搜索关键字
+router.put('/update', async (ctx) => {
     const {
-        param
-    } = ctx.body;
+        ...param
+    } = ctx.request.body;
     // 查询文章列表
     const list = await infrastructureManger.update(param);
     // 返回结果
@@ -64,12 +61,11 @@ router.post('/update', async (ctx) => {
  * 获取用户列表
  */
 router.post('/remove', async (ctx) => {
-    // 获取页码，排序方法，分类ID，搜索关键字
     const {
-        param
-    } = ctx.body;
+        id
+    } = ctx.request.body;
     // 查询文章列表
-    const list = await infrastructureManger.remove(param);
+    const list = await infrastructureManger.remove(id);
     // 返回结果
     ctx.response.status = 200;
     ctx.body = res.json(list);
@@ -77,13 +73,12 @@ router.post('/remove', async (ctx) => {
 /**
  * 获取用户列表
  */
-router.get('/getInfo', async (ctx) => {
-    // 获取页码，排序方法，分类ID，搜索关键字
+router.post('/getInfo', async (ctx) => {
     const {
-        param
-    } = ctx.body;
+        id
+    } = ctx.request.body;
     // 查询文章列表
-    const list = await infrastructureManger.getInfo(param);
+    const list = await infrastructureManger.getInfo(id);
     // 返回结果
     ctx.response.status = 200;
     ctx.body = res.json(list);

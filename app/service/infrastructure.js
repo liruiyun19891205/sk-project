@@ -18,22 +18,22 @@ class infrastructureManger {
 
     static async update(param) {
         let {
-            id,
+            ID,
             ...obj
         } = param
-        return infrastructureDao.update(id, obj);
+        return infrastructureDao.update(ID, obj);
     }
 
-    static async remove(param) {
-        let {
-            id,
-            ...obj
-        } = param
-        return infrastructureDao.remove(id);
+    static async remove(id) {
+        return infrastructureDao.remove({
+            id: id
+        });
     }
 
-    static async getInfo(param) {
-        return infrastructureDao.getInfo(param);
+    static async getInfo(id) {
+        return infrastructureDao.getInfo({
+            id: id
+        });
     }
 }
 

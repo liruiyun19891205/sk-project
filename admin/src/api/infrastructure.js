@@ -13,7 +13,9 @@ export default {
 
   // 删除
   destroy(id) {
-    return fetch.delete('/infrastructure/remove')
+    return fetch.post('/infrastructure/remove', {
+      id: id
+    })
   },
 
   // 创建

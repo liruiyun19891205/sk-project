@@ -2,10 +2,11 @@
   <section>
     <section class="search">
       <Row :gutter="16">
-        <i-col span="12"><Input search enter-button="Search" v-model="query.ID" v-on:on-search="searchEvent"
+        <i-col span="12">
+          <i-input search enter-button="Search" v-model="query.ID" v-on:on-search="searchEvent"
             placeholder="Enter something..." />
         </i-col>
-        <i-col span="12"><Button type="info">新增</Button></i-col>
+        <i-col span="12"><Button type="info" @click="goAdd">新增</Button></i-col>
       </Row>
     </section>
     <section v-if="list.length > 0">
@@ -15,7 +16,7 @@
         </template>
         <template slot-scope="{ row,index }" slot="action">
           <Button type="primary" size="small" style="margin-right: 5px" @click="update(row)">编辑</Button>
-          <Button type="error" size="small" @click="destroy(row.id)">删除</Button>
+          <Button type="error" size="small" @click="destroy(row.ID)">删除</Button>
         </template>
       </Table>
 
@@ -29,17 +30,9 @@
 
 <script>
   import infrastructureService from "../../api/infrastructure";
-  // ID` int(11) NOT NULL AUTO_INCREMENT,
-  // `PRO_ID` varchar(255) NOT NULL COMMENT '所属项目计划id',
-  // `INFRASTRUCTURE_CODE` varchar(255) NOT NULL COMMENT '工程编码',
-  // `SUB_PRO_NAME` varchar(255) NOT NULL COMMENT '基建基本属性：工程分项名称',
-  // `FONDS_NO` int(11) DEFAULT NULL COMMENT '基建基本属性：卷宗号',
-  // `BUILD_M` double DEFAULT NULL COMMENT '基建基本属性：建设总投资，可选填',
-  // `NEED_AREA` double DEFAULT NULL COMMENT '基建基本属性：征地面积，可选填',
-  // `NEW_BUILD_AREA` double DEFAULT NULL COMMENT '基建基本属性：新增建筑面积，可选填',
-  // `REBUILD_AREA` double DEFAULT NULL COMMENT '基建基本属性：改造建筑面积，可选填',
-  // `REMARK` varchar(4000) DEFAULT NULL,
-  // `NEED_SITE` varchar(255) DEFAULT NULL,
+  import {
+    log
+  } from 'util';
   export default {
     data() {
       return {
@@ -108,6 +101,40 @@
       },
       searchEvent() {
         this._getList();
+      },
+      goAdd() {
+        this.$router.push(`/infrAdd`);
+      },
+      update(row) {
+        this.$router.push({
+          name: 'infrAdd',
+          params: {
+            id: row.ID
+          }
+        })
+        // this.$router.push(`/infrAdd`);
+      },
+      // 
+      destroy(id) {
+        this.$Modal.confirm({
+          title: '提示',
+          content: '<p>确定删除吗？</p>',
+          loading: true,
+          onOk: async () => {
+            try {
+              await infrastructureService.destroy(id);
+              this.$Message.success('删除成功');
+              this._getList();
+            } catch (e) {
+              this.$Message.error(e);
+            } finally {
+              this.$Modal.remove();
+            }
+          },
+          onCancel: () => {
+            this.$Message.warning('取消！');
+          }
+        });
       },
     }
   }

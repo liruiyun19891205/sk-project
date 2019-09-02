@@ -44,6 +44,10 @@ const menus = [{
       name: "基建列表",
       path: "/infrlist",
       icon: "md-list"
+    }, {
+      name: "基建添加",
+      path: "/infrAdd",
+      icon: "md-list"
     }]
   }
 ];

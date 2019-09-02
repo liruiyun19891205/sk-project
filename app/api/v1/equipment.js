@@ -81,7 +81,6 @@ router.post('/listByid', async (ctx) => {
 
 //编辑页面首次加载根据id查询
 router.post('/listEditid', async (ctx) => {
-    console.log(11);
     let param = ctx.request.body; //  query
     let { id, ...obj } = param;
     // update(table, moduleBean, whereParam)

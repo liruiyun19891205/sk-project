@@ -14,12 +14,12 @@ class infrastructureDao {
         let {
             ID
         } = param;
-        let whereSql = ``;  // 在这里添加where条件
+        let whereSql = ``; // 在这里添加where条件
         if (ID) {
             whereSql += ` and ID=?`;
         }
         let sql = `select * from T_MDA_INFRASTRUCTURE where 1=1 ${whereSql} limit ?,?`;
-        let values = [ID].filter(item => item); // 过滤掉假值\
+        let values = [ID].filter(item => item); // 过滤掉假值
         let [list, [{
             total
         }]] = await Promise.all([
@@ -51,10 +51,8 @@ class infrastructureDao {
      * 删除数据
      * @param {*} param 
      */
-    static async remove(id, param) {
-        return db.remove('T_MDA_INFRASTRUCTURE', {
-            id: id
-        })
+    static async remove(param) {
+        return db.remove('T_MDA_INFRASTRUCTURE', param);
     }
     /**
      * 获取数据
@@ -62,9 +60,7 @@ class infrastructureDao {
      */
     static async getInfo(param) {
         let [info] = await db.find("T_MDA_INFRASTRUCTURE", param);
-        return {
-            data: info
-        }
+        return info
     }
 }
 
